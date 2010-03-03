@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <!--<bean id="xmlViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">-->
+        <!--<property name="order" value="1" />-->
+        <!--<property name="location" value="/WEB-INF/conf/view.xml" />-->
+    <!--</bean>-->
+
+
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="alwaysUseFullPath" value="true" />
+        <property name="mappings">
+            <value>
+                /available**=availabilityController
+                /containers**=containerMonitor
+                /context/**=containerMonitor
+                /memory/**=memoryMonitor
+                /contexts/**=contextsMonitor
+                /servlet/**=servletMonitor
+            </value>
+        </property>
+    </bean>
+    <!--/performance/**=performanceController-->
+    <!--/monitor/**=monitorController-->
+
+    <bean id="contextsMonitor" class="au.edu.une.monitor.web.TomcatContainersMonitor">
+        <property name="defaultView" value="contexts" />
+    </bean>
+
+    <bean id="availabilityController" class="au.edu.une.monitor.web.AvailabilityMonitor">
+        <property name="view" value="status" />
+        <property name="monitors">
+            <map>
+                <entry key="portal" value-ref="manager" />
+            </map>
+        </property>
+    </bean>
+
+    <bean id="servletMonitor" class="au.edu.une.monitor.web.ServletsMonitor">
+        <property name="defaultView" value="status" />
+    </bean>
+
+    <bean id="containerMonitor" class="au.edu.une.monitor.web.ContainerMonitor">
+        <property name="defaultView" value="containers" />
+    </bean>
+
+    <bean id="memoryMonitor" class="au.edu.une.monitor.web.MemoryMonitor">
+        <property name="view" value="memory" />
+    </bean>
+
+    <bean id="monitor" class="au.edu.une.monitor.container.tomcat55.TomcatContextState">
+        <constructor-arg index="0" value="Catalina:j2eeType=WebModule,name=//localhost/monitor,J2EEApplication=none,J2EEServer=none" />
+        <constructor-arg index="1" value="monitor" />
+    </bean>
+
+    <bean id="manager" class="au.edu.une.monitor.container.tomcat55.TomcatContextState">
+        <constructor-arg index="0" value="Catalina:j2eeType=WebModule,name=//localhost/manager,J2EEApplication=none,J2EEServer=none" />
+        <constructor-arg index="1" value="manager" />
+    </bean>
+
+</beans>

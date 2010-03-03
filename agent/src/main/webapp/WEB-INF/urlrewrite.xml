@@ -1,0 +1,21 @@
+<urlrewrite>
+
+    <rule>
+        <note>monitor</note>
+        <from>/context/(.+)$</from>
+        <set name="metric">$1</set>
+    </rule>
+
+    <rule>
+        <note>monitor</note>
+        <from>/servlet/(.+)$</from>
+        <set name="metric">$1</set>
+    </rule>
+
+    <rule>
+        <note>monitor</note>
+        <from>/memory/(.+)$</from>
+        <set name="space">$1</set>
+    </rule>
+
+</urlrewrite>
