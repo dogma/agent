@@ -7,7 +7,7 @@
 
             for (String s : spaces) {
         %>
-        <a href="<c:url value="/memory/summary"/>?space=<%=s%>"><%=s%></a>:
+        <%=s%>:
         <a href="<c:url value="/memory/free" />?space=<%=s%>">Free</a>
         <a href="<c:url value="/memory/max" />?space=<%=s%>">Max</a>
         <a href="<c:url value="/memory/used"/>?space=<%=s%>">Used</a>
