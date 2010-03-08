@@ -1,0 +1,9 @@
+#Ignoring project files
+.idea
+*.iml
+
+#Ignoring subversion files
+.svn
+
+#Ignoring maven related files
+target
