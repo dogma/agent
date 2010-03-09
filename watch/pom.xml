@@ -101,7 +101,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>watch</finalName>
     </build>
 
 </project>

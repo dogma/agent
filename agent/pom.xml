@@ -97,7 +97,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>agent</finalName>
     </build>
 
 </project>
