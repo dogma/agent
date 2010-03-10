@@ -70,7 +70,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>monitor</finalName>
     </build>
 
 </project>
