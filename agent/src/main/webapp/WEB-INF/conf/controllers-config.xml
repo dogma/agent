@@ -36,16 +36,7 @@
         <property name="defaultView" value="contexts" />
     </bean>
 
-    <bean id="availabilityController" class="au.edu.une.monitor.web.AvailabilityMonitor">
-        <property name="view" value="status" />
-        <property name="monitors">
-            <map>
-                <entry key="portal" value-ref="manager" />
-            </map>
-        </property>
-    </bean>
-
-    <bean id="servletMonitor" class="au.edu.une.monitor.web.ServletsMonitor">
+     <bean id="servletMonitor" class="au.edu.une.monitor.web.ServletsMonitor">
         <property name="defaultView" value="status" />
     </bean>
 
@@ -55,16 +46,6 @@
 
     <bean id="memoryMonitor" class="au.edu.une.monitor.web.MemoryMonitor">
         <property name="view" value="memory" />
-    </bean>
-
-    <bean id="monitor" class="au.edu.une.monitor.container.tomcat55.TomcatContextState">
-        <constructor-arg index="0" value="Catalina:j2eeType=WebModule,name=//localhost/monitor,J2EEApplication=none,J2EEServer=none" />
-        <constructor-arg index="1" value="monitor" />
-    </bean>
-
-    <bean id="manager" class="au.edu.une.monitor.container.tomcat55.TomcatContextState">
-        <constructor-arg index="0" value="Catalina:j2eeType=WebModule,name=//localhost/manager,J2EEApplication=none,J2EEServer=none" />
-        <constructor-arg index="1" value="manager" />
     </bean>
 
 </beans>

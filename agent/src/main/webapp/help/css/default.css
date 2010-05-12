@@ -1,0 +1,9 @@
+body {
+    padding: 30px;
+}
+
+code {
+    border: 1px solid rgb(140,140,140);
+    background-color: rgb(230,230,230);
+    display: block;
+}

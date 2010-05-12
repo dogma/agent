@@ -12,6 +12,7 @@
     </bean>
 
     <import resource="conf/controllers-config.xml" />
+    <import resource="conf/availability.xml" />
     <!--<bean id="webXmlPlaceholder" class="org.springframework.web.context.support.ServletContextPropertyPlaceholderConfigurer">-->
         <!--<property name="location" value="classpath:/config.properties" />-->
     <!--</bean>-->
