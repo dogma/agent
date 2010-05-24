@@ -6,6 +6,10 @@
 
   <display-name>WebApp Monitoring Utility</display-name>
 
+    <session-config>
+        <session-timeout>0</session-timeout>
+    </session-config>
+
     <!--<filter>-->
         <!--<filter-name>springSecurityFilterChain</filter-name>-->
         <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
