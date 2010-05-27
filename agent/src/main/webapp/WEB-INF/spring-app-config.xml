@@ -23,12 +23,7 @@
 	<!--<bean id="pdfDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">-->
 		<!--<property name="jndiName"><value>java:comp/env/jdbc/pdfconverter</value></property>-->
 	<!--</bean>-->
-
-    <bean id="appInjector" class="au.edu.une.monitor.utility.WebAppSetup">
-        <property name="toSet">
-            <map>
-                <entry key="version" value="${version}" />
-            </map>
-        </property>
+    <bean id="version" class="java.lang.String">
+        <constructor-arg value="${version}" /> 
     </bean>
 </beans>
