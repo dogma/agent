@@ -70,7 +70,7 @@
                     <webResources>
                         <resource>
                             <!-- Enable filtering -->
-                            <!--<filtering>true</filtering>-->
+                            <filtering>true</filtering>
                             <!-- this is relative to the pom.xml directory -->
                             <directory>src/main/web-resources</directory>
                         </resource>

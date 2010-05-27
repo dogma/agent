@@ -6,7 +6,7 @@
     <bean id="propertyPlaceholder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:/monitor.properties</value>
+                <value>classpath:/agent.properties</value>
             </list>
         </property>
     </bean>
@@ -23,5 +23,7 @@
 	<!--<bean id="pdfDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">-->
 		<!--<property name="jndiName"><value>java:comp/env/jdbc/pdfconverter</value></property>-->
 	<!--</bean>-->
-
+    <bean id="version" class="java.lang.String">
+        <constructor-arg value="${version}" /> 
+    </bean>
 </beans>
