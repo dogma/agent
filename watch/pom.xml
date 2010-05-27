@@ -64,24 +64,7 @@
     </dependencies>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <!--<version>2.0.2</version>-->
-                <configuration>
-                    <!--<filters>-->
-                    <!--<filter>build-profiles/prod/web.xml.tokens</filter>-->
-                    <!--</filters>-->
-                    <webResources>
-                        <resource>
-                            <!-- Enable filtering -->
-                            <!--<filtering>true</filtering>-->
-                            <!-- this is relative to the pom.xml directory -->
-                            <directory>src/main/web-resources</directory>
-                        </resource>
-                    </webResources>
-                </configuration>
-            </plugin>
+           
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -101,6 +84,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        
     </build>
 
 </project>
