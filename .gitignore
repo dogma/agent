@@ -1,6 +1,8 @@
 #Ignoring project files
 .idea
 *.iml
+*.ipr
+*.iws
 
 #Ignoring subversion files
 .svn
