@@ -11,9 +11,10 @@
 </div>
 <div id="info">
     <h3>Server Info:</h3>
-    Server Info: <%= application.getServerInfo() %><br/>
-    ServerName: <%= request.getServerName() %><br/>
-    Server: <%= request.getLocalName() + ":" + request.getLocalPort()%>
+    <div id="server-info"><label class="label">Server Info:</label> <%= application.getServerInfo() %></div>
+    <div id="server-name"><label>ServerName:</label> <%= request.getServerName() %></div>
+    <div id="local-name"><label>Server:</label> <%= request.getLocalName() + ":" + request.getLocalPort()%></div>
+    <div id="agent-version"><label>Agent Version:</label>${version}</div>
 </div>
 <div id="manage">
     <h3>Manage</h3>

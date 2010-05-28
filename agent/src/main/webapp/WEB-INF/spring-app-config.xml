@@ -26,4 +26,12 @@
     <bean id="version" class="java.lang.String">
         <constructor-arg value="${version}" /> 
     </bean>
+
+    <bean id="attributeImporter" class="au.edu.une.monitor.utility.WebAppSetup">
+        <property name="toSet">
+            <map>
+                <entry key="version" value="${version}" />
+            </map>
+        </property>
+    </bean>
 </beans>

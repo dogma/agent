@@ -102,7 +102,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>${pom.artifactId}</finalName>
     </build>
 
 </project>
