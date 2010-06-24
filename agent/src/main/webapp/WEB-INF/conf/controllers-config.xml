@@ -26,6 +26,7 @@
                 /memory/**=memoryMonitor
                 /contexts/**=contextsMonitor
                 /servlet/**=servletMonitor
+                /state/**=stateController
             </value>
         </property>
     </bean>
@@ -46,6 +47,11 @@
 
     <bean id="memoryMonitor" class="au.edu.une.monitor.web.MemoryMonitor">
         <property name="view" value="memory" />
+    </bean>
+
+    <bean id="stateController" class="au.edu.une.monitor.web.StateController">
+        <property name="view" value="state"/>
+        <property name="runtimeConfigDAO" ref="runtimeConfigDAO" />
     </bean>
 
 </beans>

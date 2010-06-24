@@ -1,5 +1,7 @@
 package au.edu.une.monitor.web;
 
+import au.edu.une.monitor.exceptions.StateNotFoundException;
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.mvc.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,16 +23,27 @@ import java.util.Set;
 public class AvailabilityMonitor implements Controller {
     private String view;
     private HashMap<String, Monitor> monitors;
+    private RuntimeConfigDAO runtimeConfigDAO;
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mav = new ModelAndView(getView());
 
         mav.addObject("status", "OK");
+        try {
+            if (runtimeConfigDAO.getState().isDisabled()) {
+                mav.addObject("status", State.DISABLED.toUpperCase());
+                response.setStatus(500);
+            }
+        } catch (StateNotFoundException e) {
+            logger.error("Could not retrieve currently configured state of agent. "+e.getMessage());
+        }
         if (monitors != null) {
             Set<String> keys = monitors.keySet();
             for (String s : keys) {
                 if (!monitors.get(s).check()) {
                     mav.addObject("status", "CRITICAL");
+                    response.setStatus(500);
                     return mav;
                 }
             }
@@ -53,4 +66,13 @@ public class AvailabilityMonitor implements Controller {
     public void setMonitors(HashMap<String, Monitor> monitors) {
         this.monitors = monitors;
     }
+
+    public RuntimeConfigDAO getRuntimeConfigDAO() {
+        return runtimeConfigDAO;
+    }
+
+    public void setRuntimeConfigDAO(RuntimeConfigDAO runtimeConfigDAO) {
+        this.runtimeConfigDAO = runtimeConfigDAO;
+    }
+
 }

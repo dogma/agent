@@ -8,4 +8,5 @@ package au.edu.une.monitor.web;
  * To change this template use File | Settings | File Templates.
  */
 public class MonitorController {
+
 }

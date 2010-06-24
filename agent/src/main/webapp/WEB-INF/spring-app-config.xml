@@ -11,8 +11,12 @@
         </property>
     </bean>
 
+    <!-- Default state of agent. Defaults to enabled. -->
+    <bean id="defaultState" class="au.edu.une.monitor.web.State" />
+
     <import resource="conf/controllers-config.xml" />
     <import resource="conf/availability.xml" />
+    <import resource="conf/dao-config.xml" />
     <!--<bean id="webXmlPlaceholder" class="org.springframework.web.context.support.ServletContextPropertyPlaceholderConfigurer">-->
         <!--<property name="location" value="classpath:/config.properties" />-->
     <!--</bean>-->

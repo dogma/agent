@@ -18,8 +18,8 @@
 </div>
 <div id="manage">
     <h3>Manage</h3>
-    <a href="/manage/state">Set state</a>
-    <a href="/manage/forcegc">Force GC</a>
+    <a href="/agent/state">Set state</a>
+    <a href="/agent/forcegc">Force GC</a>
 </div>
 </body>
 </html>

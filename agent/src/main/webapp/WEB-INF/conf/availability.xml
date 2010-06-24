@@ -10,6 +10,7 @@
                 <!--<entry key="portal" value-ref="manager" />-->
             </map>
         </property>
+        <property name="runtimeConfigDAO" ref="runtimeConfigDAO" />
     </bean>
 
     <!--<bean id="monitor" class="au.edu.une.monitor.container.tomcat55.TomcatContextState">-->
