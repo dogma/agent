@@ -36,6 +36,7 @@ public class StateController implements Controller {
         State currentState = null;
         String[] targets = request.getRequestURI().split("/");
         String agentStateUrl = "/"+targets[1]+"/"+targets[2]; 
+        String agentIndexUrl = "/"+targets[1];
         ModelAndView mav = new ModelAndView(getView());
 
         try {
@@ -70,6 +71,7 @@ public class StateController implements Controller {
         mav.addObject("currentState", currentState);
         mav.addObject("newState", newState);
         mav.addObject("agentStateUrl", agentStateUrl);
+        mav.addObject("agentIndexUrl", agentIndexUrl);
         return mav;  //To change body of implemented methods use File | Settings | File Templates.
     }
 

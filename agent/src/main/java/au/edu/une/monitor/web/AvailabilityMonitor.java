@@ -25,14 +25,17 @@ public class AvailabilityMonitor implements Controller {
     private HashMap<String, Monitor> monitors;
     private RuntimeConfigDAO runtimeConfigDAO;
     private Logger logger = Logger.getLogger(this.getClass().getName());
+    private final static String STATUS_AGENT_OK = "OK";
+    private final static String STATUS_AGENT_DISABLED = "DISABLED";
+    private final static String STATUS_AGENT_CRITICAL = "CRITICAL";
 
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mav = new ModelAndView(getView());
 
-        mav.addObject("status", "OK");
+        mav.addObject("status", STATUS_AGENT_OK);
         try {
             if (runtimeConfigDAO.getState().isDisabled()) {
-                mav.addObject("status", State.DISABLED.toUpperCase());
+                mav.addObject("status", STATUS_AGENT_DISABLED);
                 response.setStatus(500);
             }
         } catch (StateNotFoundException e) {
@@ -42,7 +45,7 @@ public class AvailabilityMonitor implements Controller {
             Set<String> keys = monitors.keySet();
             for (String s : keys) {
                 if (!monitors.get(s).check()) {
-                    mav.addObject("status", "CRITICAL");
+                    mav.addObject("status", STATUS_AGENT_CRITICAL);
                     response.setStatus(500);
                     return mav;
                 }

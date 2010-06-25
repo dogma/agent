@@ -3,9 +3,9 @@
 <body>
 <div id="menu">
     <h3>Menu</h3>
-    <a href="./available">Available</a>
-    <a href="./context">Running contexts</a>
-    <a href="./memory">Memory</a>
+    <a href="./available">Available</a> |
+    <a href="./context">Running contexts</a> |
+    <a href="./memory">Memory</a> |
     <a href="./help/">Help</a>
 
 </div>
@@ -18,7 +18,7 @@
 </div>
 <div id="manage">
     <h3>Manage</h3>
-    <a href="/agent/state">Set state</a>
+    <a href="/agent/state">Set state</a> |
     <a href="/agent/forcegc">Force GC</a>
 </div>
 </body>

@@ -21,3 +21,5 @@ The current state of the Agent is: '<strong>${currentState}</strong>'
 |
 <a href="${agentStateUrl}">Report State</a>
 |
+<a href="${agentIndexUrl}">Agent Index</a>
+|
