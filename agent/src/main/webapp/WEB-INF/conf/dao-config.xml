@@ -4,8 +4,19 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean name="runtimeConfigDAO" class="au.edu.une.monitor.web.RuntimeConfigDAOPropertiesFileImpl">
-        <property name="runtimePropertiesFilename" value="\tmp\agent.runtime.properties" />
+        <property name="runtimePropertiesFileDirectory" ref="agentRuntimePropertiesFileDirectoryBean" />
+        <property name="runtimePropertiesFileName" ref="agentRuntimePropertiesFileNameBean" />
         <property name="defaultState" ref="defaultState" />
+    </bean>
+
+    <bean id="agentRuntimePropertiesFileDirectoryBean" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:/comp/env/shared/path/container/temp"/>
+        <property name="expectedType" value="java.lang.String" />
+    </bean>
+
+    <bean id="agentRuntimePropertiesFileNameBean" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:/comp/env/agent/runtimeConfigPropertiesFilename"/>
+        <property name="expectedType" value="java.lang.String" />
     </bean>
 
 </beans>

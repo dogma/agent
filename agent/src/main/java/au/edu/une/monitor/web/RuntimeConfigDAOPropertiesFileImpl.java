@@ -15,7 +15,9 @@ import java.util.Properties;
  * To change this template use File | Settings | File Templates.
  */
 public class RuntimeConfigDAOPropertiesFileImpl extends RuntimeConfigDAOAbstractImpl {
-    private String runtimePropertiesFilename = "/tmp/agent.runtime.properties";
+    private String runtimePropertiesFileDirectory = "/tmp";
+    private String runtimePropertiesFileName = "agent.runtime.properties";
+    private String runtimePropertiesFile = runtimePropertiesFileDirectory+"/"+runtimePropertiesFileName;
     private Properties runtimeProperties = null;
     private final static String PROPERTY_KEY_FOR_CURRENT_STATE = "currentState";
     private static final String PROP_FILE_COMMENT = "Runtime configuration of Agent";
@@ -43,9 +45,9 @@ public class RuntimeConfigDAOPropertiesFileImpl extends RuntimeConfigDAOAbstract
         // Persist runtime properties
         FileOutputStream out;
         try {
-             out = new FileOutputStream(runtimePropertiesFilename);
+             out = new FileOutputStream(runtimePropertiesFile);
         } catch (FileNotFoundException e) {
-                throw new CannotSetStateException("Could not persist state because of an exception while accessing the properties file: "+runtimePropertiesFilename, e);
+                throw new CannotSetStateException("Could not persist state because of an exception while accessing the properties file: "+ runtimePropertiesFile, e);
         }
 
         try {
@@ -59,7 +61,7 @@ public class RuntimeConfigDAOPropertiesFileImpl extends RuntimeConfigDAOAbstract
     @Override
     public void clearState() {
         // Remove properties file
-        String fileName = runtimePropertiesFilename;
+        String fileName = runtimePropertiesFile;
         // A File object to represent the filename
         File f = new File(fileName);
 
@@ -91,15 +93,15 @@ public class RuntimeConfigDAOPropertiesFileImpl extends RuntimeConfigDAOAbstract
         // Load from properties file;
         FileInputStream in;
         try { // Try opening the properties file
-            in = new FileInputStream(runtimePropertiesFilename);
+            in = new FileInputStream(runtimePropertiesFile);
         } catch (FileNotFoundException e) {
             // Try creating the properties file
             FileOutputStream out;
             try { // Try creating the properties file
-                 out = new FileOutputStream(runtimePropertiesFilename);
+                 out = new FileOutputStream(runtimePropertiesFile);
             } catch (FileNotFoundException fnfe) {
                 setRuntimePropertiesToCurrentState();
-                throw new RuntimeConfigInitialisationException("While initialising runtime properties, could not create properties file at "+runtimePropertiesFilename+".", fnfe);
+                throw new RuntimeConfigInitialisationException("While initialising runtime properties, could not create properties file at "+ runtimePropertiesFile +".", fnfe);
             }
             try { // Try writing the properties file
                 runtimeProperties.store(out, PROP_FILE_COMMENT);
@@ -109,10 +111,10 @@ public class RuntimeConfigDAOPropertiesFileImpl extends RuntimeConfigDAOAbstract
                 throw new RuntimeConfigInitialisationException("While initialising runtime properties, encountered an IOException when writing to properties file.", ioe);
             }
             try { // try opening the properties file again, now that it has been created
-                in = new FileInputStream(runtimePropertiesFilename);
+                in = new FileInputStream(runtimePropertiesFile);
             } catch (FileNotFoundException fnfe) {
                 setRuntimePropertiesToCurrentState();
-                throw new RuntimeConfigInitialisationException("While initialising runtime properties, could not open properties file at "+runtimePropertiesFilename+".", fnfe);
+                throw new RuntimeConfigInitialisationException("While initialising runtime properties, could not open properties file at "+ runtimePropertiesFile +".", fnfe);
             }
         }
 
@@ -125,18 +127,43 @@ public class RuntimeConfigDAOPropertiesFileImpl extends RuntimeConfigDAOAbstract
         }
     }
 
+    protected String getRuntimePropertiesFile() {
+        return runtimePropertiesFile;
+    }
+
+    private void constructRuntimePropertiesFile() throws RuntimeConfigInitialisationException {
+        runtimePropertiesFile = runtimePropertiesFileDirectory + "/" + runtimePropertiesFileName;
+        initRuntimeProperties();
+    }
+
     private void setRuntimePropertiesToCurrentState() {
         runtimeProperties = new Properties();
         runtimeProperties.setProperty(PROPERTY_KEY_FOR_CURRENT_STATE, currentState.toString());
     }
 
-    public String getRuntimePropertiesFilename() {
-        return runtimePropertiesFilename;
+    protected String getRuntimePropertiesFileName() {
+        return runtimePropertiesFileName;
     }
 
-    public void setRuntimePropertiesFilename(String runtimePropertiesFilename) throws RuntimeConfigInitialisationException {
-        this.runtimePropertiesFilename = runtimePropertiesFilename;
-        initRuntimeProperties();
+    public void setRuntimePropertiesFileName(String runtimePropertiesFilename) throws RuntimeConfigInitialisationException {
+        if (runtimePropertiesFilename.startsWith("/")) {
+            this.runtimePropertiesFileName = runtimePropertiesFilename.substring(1);
+        } else {
+            this.runtimePropertiesFileName = runtimePropertiesFilename;
+        }
+        constructRuntimePropertiesFile();
     }
 
+    protected String getRuntimePropertiesFileDirectory() {
+        return runtimePropertiesFileDirectory;
+    }
+
+    public void setRuntimePropertiesFileDirectory(String runtimePropertiesFileDirectory) throws RuntimeConfigInitialisationException {
+        if (runtimePropertiesFileDirectory.endsWith("/")) {
+            this.runtimePropertiesFileDirectory = runtimePropertiesFileDirectory.substring(0, runtimePropertiesFileDirectory.length()-1);
+        } else {
+            this.runtimePropertiesFileDirectory = runtimePropertiesFileDirectory;
+        }
+        constructRuntimePropertiesFile();
+    }
 }

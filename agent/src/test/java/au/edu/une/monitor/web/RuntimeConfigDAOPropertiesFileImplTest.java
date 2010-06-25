@@ -30,7 +30,7 @@ public class RuntimeConfigDAOPropertiesFileImplTest extends RuntimeConfigDAOICom
     @Test
     public void setStateWhenFileNotExistTest() {
         try {
-            deleteFile(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFilename());
+            deleteFile(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFile());
 
             // Perform the operation
             runtimeConfigDAOPropertiesFile.setState(new State(State.DISABLED));
@@ -48,9 +48,9 @@ public class RuntimeConfigDAOPropertiesFileImplTest extends RuntimeConfigDAOICom
     @Test
     public void setStateWhenFileCannotExistTest() {
         try {
-            deleteFile(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFilename());
+            deleteFile(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFile());
             // make a directory by the same name as the properties file. This will result in a FNFException when trying to open it as a file
-            (new File(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFilename())).mkdirs();
+            (new File(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFile())).mkdirs();
 
             // Perform the operation
             runtimeConfigDAOPropertiesFile.setState(new State(State.DISABLED));
@@ -58,7 +58,7 @@ public class RuntimeConfigDAOPropertiesFileImplTest extends RuntimeConfigDAOICom
         } catch (CannotSetStateException e) {
             // Passed the test
         }
-        (new File(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFilename())).delete();
+        (new File(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFile())).delete();
     }
 
     /**
@@ -67,7 +67,7 @@ public class RuntimeConfigDAOPropertiesFileImplTest extends RuntimeConfigDAOICom
     @Test
     public void setRuntimePropertiesFileNameTest() {
         try {
-            runtimeConfigDAOPropertiesFile.setRuntimePropertiesFilename(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFilename());
+            runtimeConfigDAOPropertiesFile.setRuntimePropertiesFileName(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFileName());
         } catch (RuntimeConfigInitialisationException e) {
             Assert.fail("The file should have been created OK.");
         }
@@ -84,7 +84,7 @@ public class RuntimeConfigDAOPropertiesFileImplTest extends RuntimeConfigDAOICom
             Assert.fail("Cannot set state for some reason...");
         }
         try {
-            runtimeConfigDAOPropertiesFile.setRuntimePropertiesFilename(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFilename());
+            runtimeConfigDAOPropertiesFile.setRuntimePropertiesFileName(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFileName());
         } catch (RuntimeConfigInitialisationException e) {
             Assert.fail("The file should have been created OK.");
         }
@@ -113,13 +113,13 @@ public class RuntimeConfigDAOPropertiesFileImplTest extends RuntimeConfigDAOICom
     @Test
     public void setRuntimePropertiesFileNameWhenFileCannotExistTest() {
         // make a directory by the same name as the properties file. This will result in a FNFException when trying to open it as a file
-        (new File(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFilename())).mkdirs();
+        (new File(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFile())).mkdirs();
         try {
-            runtimeConfigDAOPropertiesFile.setRuntimePropertiesFilename(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFilename());
+            runtimeConfigDAOPropertiesFile.setRuntimePropertiesFileName(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFileName());
             Assert.fail("The file already exists as a directory. An exception should have been thrown instead.");
         } catch (RuntimeConfigInitialisationException e) {
         }
-        (new File(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFilename())).delete();
+        (new File(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFile())).delete();
     }
 
 

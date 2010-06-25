@@ -15,7 +15,8 @@
 
     <!-- These are the implementation beans which will be used for each interface test -->
     <bean name="runtimeConfigDAOPropertiesFileImpl" class="au.edu.une.monitor.web.RuntimeConfigDAOPropertiesFileImpl">
-        <property name="runtimePropertiesFilename" value="/tmp/agent.runtime.properties" />
+        <property name="runtimePropertiesFileDirectory" value="/tmp" />
+        <property name="runtimePropertiesFileName" value="agent.runtime.properties" />
     </bean>
 
 </beans>
