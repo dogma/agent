@@ -24,6 +24,42 @@ public class RuntimeConfigDAOPropertiesFileImplTest extends RuntimeConfigDAOICom
     }
 
     /**
+     * This tests the situation when a state has been persisted to a properties file. The constructor is meant to initialise
+     * the new objects state with whatever value is found in this persistence.
+     */
+    @Test
+    public void constructorWhenFileExistTest() {
+        RuntimeConfigDAOPropertiesFileImpl runtimeConfigDAOPropertiesFile2 = null;
+        try {
+            runtimeConfigDAOPropertiesFile.setState(new State(State.DISABLED));
+        } catch (CannotSetStateException e) {
+            Assert.fail("Unexpected exception: "+e);
+        }
+        try {
+            runtimeConfigDAOPropertiesFile2 = new RuntimeConfigDAOPropertiesFileImpl();
+            runtimeConfigDAOPropertiesFile2.setRuntimePropertiesFileDirectory(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFileDirectory());
+            runtimeConfigDAOPropertiesFile2.setRuntimePropertiesFileName(runtimeConfigDAOPropertiesFile.getRuntimePropertiesFileName());
+            Assert.assertEquals("State was persisted to disabled. The constructor should have picked this up.", true, runtimeConfigDAOPropertiesFile2.currentState.isDisabled());
+        } catch (RuntimeConfigInitialisationException e) {
+            Assert.fail("Unexpected exception: "+e);
+        }
+
+    }
+
+    /**
+     * Tests the raw constructor. Should instantiate a RuntimeConfigDAO object with a default state.
+     */
+    @Test
+    public void constructorTest() {
+        try {
+            RuntimeConfigDAOPropertiesFileImpl runtimeConfigDAOPropertiesFile2 = new RuntimeConfigDAOPropertiesFileImpl();
+            Assert.assertEquals(runtimeConfigDAOPropertiesFile2.getDefaultState().isEnabled(), runtimeConfigDAOPropertiesFile2.getState().isEnabled());
+        } catch (Throwable e) {
+            Assert.fail("Unexpected exception: "+e);
+        }
+    }
+    
+    /**
      * This tests the situation when the state is asked to be set, but the properties file does not yet exist.
      * The implementation should create the properties file, and then set the state.
      */

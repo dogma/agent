@@ -25,6 +25,7 @@ public class RuntimeConfigDAOPropertiesFileImpl extends RuntimeConfigDAOAbstract
     public RuntimeConfigDAOPropertiesFileImpl() throws RuntimeConfigInitialisationException {
         super();
         initRuntimeProperties();
+        setCurrentStateToRuntimeProperties();
     }
 
     @Override
@@ -139,6 +140,10 @@ public class RuntimeConfigDAOPropertiesFileImpl extends RuntimeConfigDAOAbstract
     private void setRuntimePropertiesToCurrentState() {
         runtimeProperties = new Properties();
         runtimeProperties.setProperty(PROPERTY_KEY_FOR_CURRENT_STATE, currentState.toString());
+    }
+
+    private void setCurrentStateToRuntimeProperties() {
+        currentState = new State(runtimeProperties.getProperty(PROPERTY_KEY_FOR_CURRENT_STATE, defaultState.toString()));
     }
 
     protected String getRuntimePropertiesFileName() {

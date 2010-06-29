@@ -34,6 +34,9 @@ public abstract class RuntimeConfigDAOAbstractImpl implements RuntimeConfigDAO {
     }
 
     public State getDefaultState() {
+        if (defaultState == null) {
+            setDefaultState(new State(State.ENABLED));
+        }
         return defaultState;
     }
 
