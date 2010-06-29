@@ -13,4 +13,8 @@ public class StateNotFoundException extends Throwable {
     public StateNotFoundException(String msg, Throwable throwable) {
         super(msg, throwable);
     }
+
+    public StateNotFoundException(String msg) {
+        super(msg);
+    }
 }

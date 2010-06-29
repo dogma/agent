@@ -8,7 +8,7 @@ package au.edu.une.monitor.web;
  * To change this template use File | Settings | File Templates.
  */
 public class State {
-    Boolean enabled = true, disabled=false;
+    private Boolean enabled = true, disabled=false;
     final static String ENABLED = "enabled";
     final static String DISABLED = "disabled";
 

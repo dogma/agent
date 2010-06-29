@@ -31,6 +31,9 @@ public class RuntimeConfigDAOPropertiesFileImpl extends RuntimeConfigDAOAbstract
     @Override
     public State getState() throws StateNotFoundException {
         logger.debug("Returning currentState of "+currentState);
+        if (currentState == null) {
+            throw new StateNotFoundException("Could not find a valid current state. It was set to null for some reason");
+        }
         // Return known value
         return currentState;
     }
